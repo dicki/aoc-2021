@@ -19,7 +19,7 @@ Parallel.ForEach(Enumerable.Range(
 
 stopwatch.Stop();
 System.Console.WriteLine($"Lowest fuel cost: {crabFuelCost.Min()}");
-System.Console.WriteLine($"Total runtime: {stopwatch.Elapsed}");
+System.Console.WriteLine($"Total runtime: {stopwatch.ElapsedMilliseconds}");
 
 public int CalculateCrabFuel(IEnumerable<int> crabs, int destinationPosition)
 {
@@ -28,7 +28,7 @@ public int CalculateCrabFuel(IEnumerable<int> crabs, int destinationPosition)
        
         int min = Math.Min(destinationPosition, c);
         int max = Math.Max(destinationPosition, c);
-        int delta = max - min;
-        return Enumerable.Range(1, delta).Sum<int>(r => r);
+        int n = max - min;
+        return n * (n + 1) / 2;
     });
 }
