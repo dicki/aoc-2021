@@ -25,7 +25,6 @@ public int CalculateCrabFuel(IEnumerable<int> crabs, int destinationPosition)
 {
     return crabs.Sum(c =>
     {
-       
         int min = Math.Min(destinationPosition, c);
         int max = Math.Max(destinationPosition, c);
         int n = max - min;
