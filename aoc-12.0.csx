@@ -4,13 +4,16 @@ var input = File.ReadAllLines(@".\input.12.0.txt")
     .Select(line => line.Select(c => c & 15).ToArray())
     .ToArray();
 
-int noOfSteps = 100;
+int noOfSteps = 0;
 HashSet<string> flashedDuringStep = new HashSet<string>();
 
 int noOfFlashes = 0;
+int noOfMegaFlashes = 0;
 
-for (int step = 0; step < noOfSteps; step++)
+// for (int step = 0; step < noOfSteps; step++)
+while (noOfMegaFlashes == 0)
 {
+    noOfSteps++;
     for (int yPos = 0; yPos < input.Length; yPos++)
     {
         for (int xPos = 0; xPos < input[yPos].Length; xPos++)
@@ -31,10 +34,18 @@ for (int step = 0; step < noOfSteps; step++)
         var xPos = flashedOcto[2] & 15;
         input[yPos][xPos] = 0;
     }
+
+    if (flashedDuringStep.Count() == 100)
+    {
+        noOfMegaFlashes++;
+        System.Console.WriteLine($"Mega flash during step {noOfSteps}");
+    }
+    
     flashedDuringStep.Clear();
 }
 
 System.Console.WriteLine($"No of flashes: {noOfFlashes}");
+System.Console.WriteLine($"No of MEGA flashes: {noOfMegaFlashes}");
 
 void FlashOctopus(int yPos, int xPos)
 {
